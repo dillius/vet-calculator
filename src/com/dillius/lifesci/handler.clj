@@ -1,7 +1,8 @@
 (ns com.dillius.lifesci.handler
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
-            [compojure.core :refer :all]))
+            [compojure.core :refer :all]
+            [ring.util.response :as resp]))
 
 
 (defn mainPage
@@ -9,7 +10,8 @@
   (str "Hello World, " name))
 
 (defroutes app-routes
-  (GET "/" [] (mainPage "asshole"))
+  (GET "/" [] (resp/resource-response "index.html" {:root "public"}))
+  (route/resources "/")
   (route/not-found "Not Found"))
 
 (def app

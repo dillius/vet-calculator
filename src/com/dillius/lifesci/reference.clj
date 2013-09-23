@@ -1,18 +1,20 @@
 (ns com.dillius.lifesci.reference)
 
+; Imperial conversion
+
 (def imperialConversion
   (hash-map
-   [:inch :3] (fn [value] (identity [(* value 16.387) [:centi :meter :3]]))
-   [:foot :3] (fn [value] (identity [(* value 0.0283) [:base :meter :3]]))
-   [:fluidounce] (fn [value] (identity[(* value 28.413) [:milli :liter]]))
-   [:fluidounce :us] (fn [value] (identity[(* value 29.574) [:milli :liter]]))
-   [:pint] (fn [value] (identity [(* value 0.5683) [:base :liter]]))
-   [:pint :us] (fn [value] (identity [(* value 0.4731) [:base :liter]]))
-   [:gallon] (fn [value] (identity [(* value 4.5461) [:base :liter]]))
-   [:gallon :us] (fn [value] (identity [(* value 3.7854) [:base :liter]]))
+   [:inch :3] (fn [value] (identity [(* value 16.387M) [:centi :meter :3]]))
+   [:foot :3] (fn [value] (identity [(* value 0.0283M) [:base :meter :3]]))
+   [:fluidounce] (fn [value] (identity[(* value 28.413M) [:milli :liter]]))
+   [:fluidounce :us] (fn [value] (identity[(* value 29.574M) [:milli :liter]]))
+   [:pint] (fn [value] (identity [(* value 0.5683M) [:base :liter]]))
+   [:pint :us] (fn [value] (identity [(* value 0.4731M) [:base :liter]]))
+   [:gallon] (fn [value] (identity [(* value 4.5461M) [:base :liter]]))
+   [:gallon :us] (fn [value] (identity [(* value 3.7854M) [:base :liter]]))
 
-   [:ounce] (fn [value] (vector (* value 28.35) [:base :gram]))
-   [:pound] (fn [value] (vector (* value 0.4536) [:kilo :gram]))))
+   [:ounce] (fn [value] (vector (* value 28.35M) [:base :gram]))
+   [:pound] (fn [value] (vector (* value 0.4536M) [:kilo :gram]))))
 
 (defn conversionUnits
   [amount units]
@@ -42,18 +44,20 @@
 
 (comment (convertImperialValue [4 [:fluidounce] [:pound]]))
 
+; Metric conversion
+
 (def metricRates
   (hash-map
-   :kilo 1000
-   :hecto 100
-   :deca 10
-   :base 1
-   :deci 0.1
-   :centi 0.01
-   :milli 0.001
-   :micro 0.000001
-   :nano 0.000000001
-   :pico 0.000000000001
+   :kilo 1000M
+   :hecto 100M
+   :deca 10M
+   :base 1M
+   :deci 0.1M
+   :centi 0.01M
+   :milli 0.001M
+   :micro 0.000001M
+   :nano 0.000000001M
+   :pico 0.000000000001M
    ))
 
 (defn changeMetricPrefix

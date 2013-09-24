@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>VRS - Dosage Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/application.js"></script>
+  </head>
+  <body>
+    <div id="navbar"></div>
+    <div class="container">
+      <form role="form">
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label for="weight">Weight</label>
+            <input type="number" class="form-control" id="weight" placeholder="Weight of animal" min="1">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="weightUnit">&nbsp;</label>
+            <select class="form-control" id="weightUnit">
+              <option value="kilo gram">Kilograms</option>
+              <option value="pound">Pounds</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label for="weight">Dose</label>
+            <input type="number" class="form-control" id="dose" placeholder="Dose by weight" min="1">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="doseUnit">&nbsp;</label>
+            <select class="form-control" id="doseUnit">
+              <option value="milli gram">Milligrams</option>
+              <option value="base gram">Grams</option>
+              <option value="kilo gram">Kilograms</option>
+              <option value="ounce">Ounces</option>
+              <option value="pound">Pounds</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="doseUnitPer">per</label>
+            <select class="form-control" id="doseUnitPer">
+              <option value="kilo gram">Kilograms</option>
+              <option value="pound">Pounds</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label for="weight">Formulation</label>
+            <input type="number" class="form-control" id="formulation" placeholder="Formulation of medicine" min="1">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="formulationUnit">&nbsp;</label>
+            <select class="form-control" id="formulationUnit">
+              <option value="milli gram">Milligrams</option>
+              <option value="base gram">Grams</option>
+              <option value="kilo gram">Kilograms</option>
+              <option value="ounce">Ounces</option>
+              <option value="pound">Pounds</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="formulationUnitPer">per</label>
+            <select class="form-control" id="formulationUnitPer">
+              <option value="milli liter">Milliliters</option>
+              <option value="base liter">Liters</option>
+              <option value="kilo liter">Kiloliters</option>
+              <option value="fluidounce">Fluid Ounces</option>
+              <option value="pint">Pints</option>
+              <option value="gallon">Gallons</option>
+            </select>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-md-3">
+          <label for="result">Milliliters required:</label>
+          <input type="number" class="form-control" id="result" disabled>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

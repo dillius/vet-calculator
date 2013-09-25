@@ -4,9 +4,9 @@
         com.dillius.lifesci.reference))
 
 (deftest test-app
-  (testing "parse-int test"
-    (let [result (parse-int "123wut")]
-      (is (= 123 result)))
+  (testing "number parse test"
+    (let [result (String->Number "12.33")]
+      (is (= 12.33 result)))
     )
 
   (testing "vector and keywordize units"

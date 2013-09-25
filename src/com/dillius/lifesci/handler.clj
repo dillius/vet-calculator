@@ -5,7 +5,7 @@
             [ring.util.response :as resp]
             [clojure.walk :refer :all]
             [cheshire.core :refer :all]
-            [com.dillius.lifesci.reference :refer [parse-int vectorKeyUnits]]
+            [com.dillius.lifesci.reference :refer [String->Number vectorKeyUnits]]
             [com.dillius.lifesci.general]))
 
 
@@ -14,12 +14,12 @@
   (generate-string
    {:result
     (com.dillius.lifesci.general/dosingCalc
-     [(parse-int (:weight params))
+     [(String->Number (:weight params))
       (vectorKeyUnits (:weightUnit params))]
-     [(parse-int (:dose params))
+     [(String->Number (:dose params))
       (vectorKeyUnits (:doseUnit params))
       (vectorKeyUnits (:doseUnitPer params))]
-     [(parse-int (:formulation params))
+     [(String->Number (:formulation params))
       (vectorKeyUnits (:formulationUnit params))
       (vectorKeyUnits (:formulationUnitPer params))]
      )}))

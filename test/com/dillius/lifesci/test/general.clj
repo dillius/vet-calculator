@@ -31,4 +31,13 @@
            )]
       (is (= result [3.6288M [:milli :liter]]))))
 
+  (testing "dosing calculation decimals"
+    (let [result
+          (dosingCalc
+           [3 [:kilo :gram]]
+           [2.5 [:milli :gram] [:kilo :gram]]
+           [1 [:milli :gram] [:milli :liter]]
+           )]
+      (is (= result [7.5 [:milli :liter]]))))
+
   )

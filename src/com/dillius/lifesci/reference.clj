@@ -1,4 +1,13 @@
-(ns com.dillius.lifesci.reference)
+(ns com.dillius.lifesci.reference
+  (:require [clojure.string]))
+
+(defn parse-int [s]
+   (Integer. (re-find  #"\d+" s )))
+
+(defn vectorKeyUnits
+  [words]
+  (apply vector (map keyword (clojure.string/split words #" "))))
+
 
 ; Imperial conversion
 

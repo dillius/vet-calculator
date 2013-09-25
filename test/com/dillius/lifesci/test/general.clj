@@ -20,7 +20,7 @@
            [20 [:milli :gram] [:kilo :gram]]
            [5 [:milli :gram] [:base :liter]]
            )]
-      (is (= result [5000M [:milli :liter]]))))
+      (is (= result [5.000M [:base :liter]]))))
 
   (testing "dosing calculation weight in pounds"
     (let [result

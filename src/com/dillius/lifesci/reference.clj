@@ -15,44 +15,32 @@
 (def imperialRateAndMetricUnit
   (hash-map
    [:inch :3] [16.387M [:centi :meter :3]]
-   [:foot :3] (fn [value] (identity [(* value 0.0283M) [:base :meter :3]]))
-   [:fluidounce] (fn [value] (identity[(* value 28.413M) [:milli :liter]]))
-   [:fluidounce :us] (fn [value] (identity[(* value 29.574M) [:milli :liter]]))
-   [:pint] (fn [value] (identity [(* value 0.5683M) [:base :liter]]))
-   [:pint :us] (fn [value] (identity [(* value 0.4731M) [:base :liter]]))
-   [:gallon] (fn [value] (identity [(* value 4.5461M) [:base :liter]]))
-   [:gallon :us] (fn [value] (identity [(* value 3.7854M) [:base :liter]]))
+   [:foot :3] [0.0283M [:base :meter :3]]
+   [:fluidounce] [28.413M [:milli :liter]]
+   [:fluidounce :us] [29.574M [:milli :liter]]
+   [:pint] [0.5683M [:base :liter]]
+   [:pint :us] [0.4731M [:base :liter]]
+   [:gallon] [4.5461M [:base :liter]]
+   [:gallon :us] [3.7854M [:base :liter]]
 
-   [:ounce] (fn [value] (vector (* value 28.35M) [:base :gram]))
-   [:pound] (fn [value] (vector (* value 0.4536M) [:kilo :gram]))))
-
-(def imperialConversion
-  (hash-map
-   [:inch :3] (fn [value] (identity [(* value 16.387M) [:centi :meter :3]]))
-   [:foot :3] (fn [value] (identity [(* value 0.0283M) [:base :meter :3]]))
-   [:fluidounce] (fn [value] (identity[(* value 28.413M) [:milli :liter]]))
-   [:fluidounce :us] (fn [value] (identity[(* value 29.574M) [:milli :liter]]))
-   [:pint] (fn [value] (identity [(* value 0.5683M) [:base :liter]]))
-   [:pint :us] (fn [value] (identity [(* value 0.4731M) [:base :liter]]))
-   [:gallon] (fn [value] (identity [(* value 4.5461M) [:base :liter]]))
-   [:gallon :us] (fn [value] (identity [(* value 3.7854M) [:base :liter]]))
-
-   [:ounce] (fn [value] (vector (* value 28.35M) [:base :gram]))
-   [:pound] (fn [value] (vector (* value 0.4536M) [:kilo :gram]))))
+   [:ounce] [28.35M [:base :gram]]
+   [:pound] [0.4536M [:kilo :gram]]))
 
 (defn conversionUnits
   [amount units]
-  (if (nil? (imperialConversion units))
+  (let [impConv (imperialRateAndMetricUnit units)]
+    (if (nil? impConv)
       (vector amount units)
-      ((imperialConversion units) amount)))
+      (vector (* amount (first impConv)) (second impConv)))))
 
 (defn conversionDivisor
   [per]
   (if (nil? per)
     nil
-    (if (nil? (imperialConversion per))
-      (vector 1 per)
-      ((imperialConversion per) 1))))
+    (let [impConv (imperialRateAndMetricUnit per)]
+      (if (nil? impConv)
+        (vector 1 per)
+        (vector (first impConv) (second impConv))))))
 
 (defn convertImperialValue
   [value]

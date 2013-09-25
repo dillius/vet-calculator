@@ -2,26 +2,20 @@
   (:require [com.dillius.lifesci.reference :refer :all]))
 
 
-(defn normalizeKilo
-  "Converts a value to kilo-metric if possible."
-  [value]
-  (-> value convertImperialValue (convertMetricNumber :kilo)))
-
-(defn normalizeMilliPerKilo
-  [value]
-  (-> value convertImperialValue (convertMetricNumber :milli :kilo)))
-
-(defn normalizeMilliPerMilli
-  [value]
-  (-> value convertImperialValue (convertMetricNumber :milli :milli)))
+(defn normalizeToMetric
+  [value units]
+  (apply convertMetricNumber
+         (convertImperialValue value)
+         units))
 
 (defn dosingCalc
   [weight dose form]
   [(with-precision
        5
      (/ (*
-         (first (normalizeKilo weight))
-         (first (normalizeMilliPerKilo dose)))
-        (first (normalizeMilliPerMilli form))))
-   [:milli :liter]]
+         (first (normalizeToMetric weight [:kilo]))
+         (first (normalizeToMetric dose [:milli :kilo])))
+        (first (normalizeToMetric (take 2 form) [:milli])) ; we don't normalize /denom to keep the per units from formulation
+        ))
+   (nth form 2)]
   )

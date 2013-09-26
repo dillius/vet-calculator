@@ -1,4 +1,4 @@
-(defproject life-science-ref "0.1.0-SNAPSHOT"
+(defproject vet-calculator "0.1.0-SNAPSHOT"
   :description "Veterinary Calculator"
   :url "http://www.vetcalculator.com"
   :dependencies [[org.clojure/clojure "1.5.1"]
@@ -16,4 +16,7 @@
   {:dev {:dependencies [[ring-mock "0.1.3"]]}}
   :uberjar-name "vet-calculator.jar"
   :keep-non-project-classes true
+  :license {:name "Apache License Version 2.0"
+            :url "https://www.apache.org/licenses/LICENSE-2.0"}
+  :min-lein-version "2.0.0"
   )

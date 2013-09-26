@@ -1,6 +1,6 @@
 (defproject life-science-ref "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "Veterinary Calculator"
+  :url "http://www.vetcalculator.com"
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [compojure "1.1.5"]
                  [cheshire "5.0.2"]
@@ -14,5 +14,5 @@
   :ring {:handler com.dillius.lifesci.handler/app}
   :profiles
   {:dev {:dependencies [[ring-mock "0.1.3"]]}}
-  :keep-non-project-classes true
+  :uberjar-name "vet-calculator.jar"
   )

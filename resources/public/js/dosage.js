@@ -32,7 +32,7 @@ $(document).ready(function() {
                     //console.log(data["result"]);
                     //console.log(data["result"][0]);
                     $("#result").val(data["result"][0]);
-                    $("#resultUnit").val(data["result"][1]);
+                    $("#resultUnit").val(cleanUnitDisplay(data["result"][1]));
                 },
                 error: function (xhr, status, thrownError){
                     console.log('xhr');

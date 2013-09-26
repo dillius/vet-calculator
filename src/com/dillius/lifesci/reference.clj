@@ -85,9 +85,9 @@
               (nth value 2 nil))))
   ([value over under]
      (vector
-      (/
-       (changeMetricPrefix (first value) (first (second value)) over)
-       (changeMetricPrefix 1 (first (nth value 2)) under))
+      (with-precision 5 (/
+                         (changeMetricPrefix (first value) (first (second value)) over)
+                         (changeMetricPrefix 1 (first (nth value 2)) under)))
       (vector over (second (second value)))
       (vector under (second (nth value 2)))
       ))

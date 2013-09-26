@@ -7,4 +7,4 @@
   (let [port (Integer. (or port (System/getenv "PORT") 3010))]
     (run-jetty
      #'handler/app
-     {:port port :join? false})))
+     {:host "127.0.0.1" :port port :join? false})))

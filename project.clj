@@ -15,4 +15,5 @@
   :profiles
   {:dev {:dependencies [[ring-mock "0.1.3"]]}}
   :uberjar-name "vet-calculator.jar"
+  :keep-non-project-classes true
   )

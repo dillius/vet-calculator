@@ -11,7 +11,7 @@
            [10 [:milli :gram] [:kilo :gram]]
            [5 [:milli :gram] [:milli :liter]]
            )]
-      (is (= result [2M [:milli :liter]]))))
+      (is (= result ["2.000" [:milli :liter]]))))
 
   (testing "dosing calculation off-metric"
     (let [result
@@ -20,7 +20,7 @@
            [20 [:milli :gram] [:kilo :gram]]
            [5 [:milli :gram] [:base :liter]]
            )]
-      (is (= result [5.000M [:base :liter]]))))
+      (is (= result ["5.000" [:base :liter]]))))
 
   (testing "dosing calculation weight in pounds"
     (let [result
@@ -29,7 +29,7 @@
            [10 [:milli :gram] [:kilo :gram]]
            [5 [:milli :gram] [:milli :liter]]
            )]
-      (is (= result [3.6288M [:milli :liter]]))))
+      (is (= result ["3.629" [:milli :liter]]))))
 
   (testing "dosing calculation decimals"
     (let [result
@@ -38,6 +38,24 @@
            [2.5 [:milli :gram] [:kilo :gram]]
            [1 [:milli :gram] [:milli :liter]]
            )]
-      (is (= result [7.5 [:milli :liter]]))))
+      (is (= result ["7.500" [:milli :liter]]))))
+
+
+  (testing "fluid rate easy" ; ml/hour
+    (let [result
+          (fluidRate
+           [3 [:kilo :gram]]
+           1
+           [5 [:milli :liter] [:kilo :gram] [:hour]] ; per Hour
+           )]
+      (is (= result ["15.000" [:milli :liter] [:hour]]))))
+
+    (testing "drip rate easy" ; drop/min
+    (let [result
+          (dripRate
+           [15 [:milli :liter] [:hour]]
+           [5 [:drop] [:milli :liter]] ; per Hour
+           )]
+      (is (= result ["1.250" [:drop] [:minute]]))))
 
   )

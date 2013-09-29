@@ -36,6 +36,7 @@
                     (vectorKeyUnits (:maintenanceUnitPer params))
                     (vectorKeyUnits (:maintenanceUnitPerPer params))
                     ]
+                   (String->Number (:additionalAmount params))
                    )
         dripRate (com.dillius.lifesci.general/dripRate
                   [(String->Number (first fluidRate))

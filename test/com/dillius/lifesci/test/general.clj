@@ -50,12 +50,22 @@
            )]
       (is (= result ["15.000" [:milli :liter] [:hour]]))))
 
+  (testing "fluid rate easy with additional" ; ml/hour
+    (let [result
+          (fluidRate
+           [3 [:kilo :gram]]
+           1
+           [5 [:milli :liter] [:kilo :gram] [:hour]] ; per Hour
+           48
+           )]
+      (is (= result ["17.000" [:milli :liter] [:hour]]))))
+
     (testing "drip rate easy" ; drop/min
     (let [result
           (dripRate
            [15 [:milli :liter] [:hour]]
            [5 [:drop] [:milli :liter]] ; per Hour
            )]
-      (is (= result ["1.250" [:drop] [:minute]]))))
+      (is (= result ["1.3" [:drop] [:minute]]))))
 
   )

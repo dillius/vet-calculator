@@ -18,7 +18,8 @@ $(document).ready(function() {
                       maintenance: $("#maintenance").val(),
                       maintenanceUnitPer: $("#maintenanceUnitPer").val(),
                       maintenanceUnitPerPer: $("#maintenanceUnitPerPer").val(),
-                      givingSet: $("#givingSet").val()
+                      givingSet: $("#givingSet").val(),
+                      additionalAmount: $("#additionalAmount").val()
                      },
                 success: function(data, status, xhr){
                     //console.log('data');
@@ -57,7 +58,7 @@ $(document).ready(function() {
         }
     };
 
-    $("input").blur(runCalc);
+    $("input:not(.ignore)").blur(runCalc);
     $("select:not(.ignore)").change(runCalc);
 
     $("#maintenanceRateAuto").change(function() {
@@ -75,4 +76,14 @@ $(document).ready(function() {
         $("#givingSet").val($("#givingSetAuto").val());
         $("#givingSet").blur();
     });
+
+    function updateAdditional() {
+        var dehy = parseFloat($("#dehydrationAmount").val() || 0),
+            ongo = parseFloat($("#ongoing").val() || 0);
+        $("#additionalAmount").val((dehy * 50) + ongo);
+        $("#additionalAmount").blur();
+    };
+
+    $("#ongoing").blur(updateAdditional);
+    $("#dehydrationAmount").blur(updateAdditional);
 });

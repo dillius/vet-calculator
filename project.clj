@@ -1,4 +1,4 @@
-(defproject vet-calculator "0.1.0-SNAPSHOT"
+(defproject vet-calculator "0.1.1-SNAPSHOT"
   :description "Veterinary Calculator"
   :url "http://www.vetcalculator.com"
   :dependencies [[org.clojure/clojure "1.5.1"]

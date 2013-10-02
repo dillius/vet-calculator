@@ -19,3 +19,35 @@
                        )))
    (nth form 2)]
   )
+
+(defn fluidRate
+  ([weight multi maintenance]
+     (fluidRate weight multi maintenance 0))
+  ([weight multi maintenance addtl]
+      (let [timeMulti (if (= :day (first (nth maintenance 3 nil))) 24M 1M)]
+        [(format "%.3f"
+                 (+ (with-precision 20 (/ ( bigdec addtl) 24M))
+                    (with-precision 20
+                      (*
+                       (bigdec multi)
+                       (/ 1M (bigdec timeMulti))
+                       (with-precision 20 (*
+                                           (bigdec (first (normalizeToMetric weight [:kilo])))
+                                           (bigdec (first (normalizeToMetric maintenance [:milli :kilo])))
+                                           ))))))
+         [:milli :liter] [:hour]]))
+  )
+
+(defn dripRate
+  [fluidRate givingSet] ; ml/hour drops/ml
+  [(format "%.1f"
+           (with-precision 20
+             (/
+              (with-precision 20 (*
+                                  (bigdec (first fluidRate))
+                                  (bigdec (first givingSet))
+                                  ))
+              60M ; hour -> minute
+              )))
+   [:drop] [:minute]]
+  )

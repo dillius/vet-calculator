@@ -24,10 +24,39 @@
       (vectorKeyUnits (:formulationUnitPer params))]
      )}))
 
+(defn flowRates
+  [params]
+  (let [fluidRate (com.dillius.lifesci.general/fluidRate
+                   [(String->Number (:weight params))
+                    (vectorKeyUnits (:weightUnit params))
+                    ]
+                   (String->Number (:multiplier params))
+                   [(String->Number (:maintenance params))
+                    [:milli :liter]
+                    (vectorKeyUnits (:maintenanceUnitPer params))
+                    (vectorKeyUnits (:maintenanceUnitPerPer params))
+                    ]
+                   (String->Number (:additionalAmount params))
+                   )
+        dripRate (com.dillius.lifesci.general/dripRate
+                  [(String->Number (first fluidRate))
+                   (second fluidRate)
+                   (nth fluidRate 2 nil)]
+                  [(String->Number (:givingSet params))
+                   [:drop]
+                   [:milli :liter]]
+                  )
+        ]
+    (generate-string
+     {:resultFluidRate fluidRate
+      :resultDripRate dripRate
+      })))
+
 (defroutes app-routes
   (GET "/" [] (resp/resource-response "index.html" {:root "public"}))
 
   (GET "/api/dosageCalc" {:keys [params]} (dosageCalc params))
+  (GET "/api/flowRates" {:keys [params]} (flowRates params))
 
   (route/resources "/")
   (route/not-found "Not Found"))

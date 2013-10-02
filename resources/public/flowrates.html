@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flow Rates Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/application.js"></script>
+    <script src="js/flowrates.js"></script>
+  </head>
+  <body>
+    <div id="navbar"></div>
+    <div class="container">
+      <form role="form">
+        <div class="row">
+          <div class="form-group col-md-3 col-xs-7">
+            <label for="weight">Weight</label>
+            <input type="number" class="form-control" id="weight" placeholder="Weight of animal" min="1">
+          </div>
+          <div class="form-group col-md-2 col-xs-5">
+            <label for="weightUnit">&nbsp;</label>
+            <select class="form-control" id="weightUnit">
+              <option value="kilo gram">Kilograms</option>
+              <option value="pound">Pounds</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-4 col-xs-7">
+            <label for="maintenanceRateAuto">Animal Type -> Maintenance Rate</label>
+            <select class="form-control ignore" id="maintenanceRateAuto">
+              <option value="60">Small Dog/Cat (60 ml/kg/day)</option>
+              <option value="50">Medium Dog (50 ml/kg/day)</option>
+              <option value="40">Large Dog (40 ml/kg/day)</option>
+              <option value="2.5">Equine Adult (2.5 ml/kg/hour)</option>
+              <option value="4.5">Equine Foal (4.5 ml/kg/hour)</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2 col-xs-4">
+            <label for="multiplier">Multiplier</label>
+            <select class="form-control" id="multiplier">
+              <option value="1">1 (M1)</option>
+              <option value="2">2 (M2)</option>
+              <option value="3">3 (M3)</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-3 col-xs-10">
+            <label for="maintenance">Maintenance Rate</label>
+            <input type="number" class="form-control" id="maintenance" placeholder="Maintenance rate" min="1" value="60">
+          </div>
+          <div class="form-group col-md-2 col-xs-4">
+            <label for="maintenanceUnit">&nbsp;</label>
+            <input type="string" class="form-control" id="maintenanceUnit" value="Milliliters" disabled>
+          </div>
+          <div class="form-group col-md-2 col-xs-4">
+            <label for="maintenanceUnitPer">per</label>
+            <select class="form-control" id="maintenanceUnitPer">
+              <option value="kilo gram">Kilograms</option>
+              <option value="pound">Pounds</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2 col-xs-4">
+            <label for="maintenanceUnitPerPer">per</label>
+            <select class="form-control" id="maintenanceUnitPerPer">
+              <option value="day">Day</option>
+              <option value="hour">Hour</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-2 col-xs-6">
+            <label for="givingSet">Giving Set</label>
+            <input type="number" class="form-control" id="givingSet" placeholder="Giving set" min="1" value="20">
+          </div>
+          <div class="form-group col-md-2 col-xs-6">
+            <label for="givingSetUnit">&nbsp;</label>
+            <input type="string" class="form-control" id="givingSetUnit" value="Drops/ml" disabled>
+          </div>
+          <div class="form-group col-md-4 col-xs-8">
+            <label for="givingSetAuto">Default Giving Sets</label>
+            <select class="form-control ignore" id="givingSetAuto">
+              <option value="20">20 Drops per ml set (Standard 'Adult')</option>
+              <option value="60">60 Drops per ml set (Standard 'Paediatric')</option>
+              <option value="10">10 Drops per ml set</option>
+              <option value="10">STAT Large Animal IV set</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-3 col-xs-6">
+            <label for="ongoing">Ongoing Loss (mL/Day)</label>
+            <input type="number" class="form-control ignore" id="ongoing" placeholder="Ongoing loss" min="0" value="0">
+          </div>
+          <div class="form-group col-md-3 col-xs-6">
+            <label for="dehydrationAmount">Dehydration %</label>
+            <input type="number" step="1" min="0" max="100" class="form-control ignore" id="dehydrationAmount" value="0">
+          </div>
+          <div class="form-group col-md-3 col-xs-6">
+            <label for="additionalAmount">Total Added mL/Day</label>
+            <input type="number" class="form-control" id="additionalAmount" value="0" disabled>
+          </div>
+        </div>
+      </form>
+
+      <hr>
+      <div class="row">
+        <div class="form-group col-md-3 col-xs-7">
+          <label for="resultFluidRate">Fluid Rate (ml/hr)</label>
+          <input type="number" class="form-control" id="resultFluidRate" disabled>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-3 col-xs-7">
+          <label for="resultDripRate">Drip Rate (drop/min)</label>
+          <input type="number" class="form-control" id="resultDripRate" disabled>
+        </div>
+      </div>
+
+      <hr>
+      <div class="row text-success">
+        <br />
+        <div class="col-md-4 col-xs-6">
+          <p>One drop every <span id="oneEvery">X</span> seconds.</p>
+        </div>
+        <div class="col-md-4 col-xs-6">
+          <p><span id="everyOne">X</span> drops every second.</p>
+        </div>
+        <div class="col-md-4 col-xs-6">
+          <p><span id="everyFive">X</span> drops every 5 seconds.</p>
+        </div>
+        <div class="col-md-4 col-xs-6">
+          <p><span id="totalFourHour">X</span> mL (<span id="totalFourHourLiter">X</span> L) per 4 hours.</p>
+        </div>
+        <div class="col-md-4 col-xs-6">
+          <p><span id="totalDay">X</span> mL (<span id="totalDayLiter">X</span> L) per day.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

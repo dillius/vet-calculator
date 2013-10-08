@@ -1,4 +1,4 @@
-Veterinary Calculator
+Veterinary Calculator [![Build Status](https://travis-ci.org/dillius/vet-calculator.png?branch=master)](https://travis-ci.org/dillius/vet-calculator)
 ================
 
 Goal

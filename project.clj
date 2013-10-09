@@ -8,7 +8,7 @@
                  [org.clojure/tools.logging "0.2.6"]
                  [org.slf4j/slf4j-log4j12 "1.6.6"]
                  [ring/ring-jetty-adapter "1.2.0"]
-                 [com.datomic/datomic-free "0.8.4215" :exclusions [org.slf4j/slf4j-nop]]]
+                 [com.datomic/datomic-free "0.8.4215" :exclusions [org.slf4j/slf4j-nop org.slf4j/log4j-over-slf4j]]]
   :aot [com.dillius.lifesci.main]
   :main com.dillius.lifesci.main
   :plugins [[lein-ring "0.8.2"]]

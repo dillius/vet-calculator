@@ -1,0 +1,89 @@
+[
+ {:db/id #db/id [:db.part/db]
+  :db/ident :drug/name
+  :db/valueType :db.type/string
+  :db/unique :db.unique/value
+  :db/cardinality :db.cardinality/one
+  :db/doc "Drug name"
+  }
+
+ {:db/id #db/id [:db.part/db]
+  :db/ident :drug/notes
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/doc "Free form notes about a drug"
+  }
+
+ {:db/id #db/id [:db.part/db]
+  :db/ident :formulary/drug
+  :db/valueType :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db/doc "Drug for this formulation"
+  }
+
+  {:db/id #db/id [:db.part/db]
+   :db/ident :formulary/species
+   :db/valueType :db.type/ref
+   :db/cardinality :db.cardinality/many
+   :db/doc "Species for this formulation"
+   }
+
+  {:db/id #db/id [:db.part/db]
+   :db/ident :formulary/delivery
+   :db/valueType :db.type/ref
+   :db/cardinality :db.cardinality/many
+   :db/doc "Delivery method for this formulation"
+   }
+
+  {:db/id #db/id [:db.part/db]
+   :db/ident :formulary/min
+   :db/valueType :db.type/bigint
+   :db/cardinality :db.cardinality/one
+   :db/doc "Minimum amount"
+   }
+
+  {:db/id #db/id [:db.part/db]
+   :db/ident :formulary/max
+   :db/valueType :db.type/bigint
+   :db/cardinality :db.cardinality/one
+   :db/doc "Maximum amount"
+   }
+
+  {:db/id #db/id [:db.part/db]
+   :db/ident :formulary/units
+   :db/valueType :db.type/string
+   :db/cardinality :db.cardinality/one
+   :db/doc "Units of formulation amount"
+   }
+
+  {:db/id #db/id [:db.part/db]
+   :db/ident :formulary/sig
+   :db/valueType :db.type/string
+   :db/cardinality :db.cardinality/one
+   :db/doc "SIG data of formulation amount"
+   }
+
+
+  ;; formulary/species enum values
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.species/all]
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.species/dog]
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.species/cat]
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.species/sheep] ;; ov ovine sheep
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.species/cow] ;; bov bovine cow
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.species/goat] ;; cpr caprine goat
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.species/rabbit]
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.species/pig]
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.species/rodent]
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.species/primate]
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.species/guineapig]
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.species/reptile]
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.species/bird]
+
+  ;;formulary/delivery enum values
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.delivery/IV]
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.delivery/IM]
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.delivery/SQ]
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.delivery/IP]
+  [:db/add #db/id[:db.part/user] :db/ident :formulary.delivery/PO]
+
+  ]
